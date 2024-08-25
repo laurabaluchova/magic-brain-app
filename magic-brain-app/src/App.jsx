@@ -1,23 +1,31 @@
 import './App.css'
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import Register from './Register';
+import {useState, useEffect} from 'react';
+import {AuthProvider} from './AuthContext';
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAqPN_gP_4Mnj4Cm3mkqmQU-ObiHd9fQrY",
+  apiKey: import.meta.env.VITE_API_KEY,
 
-  authDomain: "magic-brain-app.firebaseapp.com",
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
 
-  projectId: "magic-brain-app",
+  projectId: import.meta.env.VITE_PROJECT_ID,
 
-  storageBucket: "magic-brain-app.appspot.com",
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
 
-  messagingSenderId: "1059447635938",
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
 
-  appId: "1:1059447635938:web:67cbe5c862a557d747c3bb"
+  appId: import.meta.env.VITE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+const auth = getAuth(app)
+export {auth}
 
 async function getUsers(db) {
 const usersCollection = collection(db, 'users');
@@ -28,16 +36,24 @@ return userList;
 
 const demo_users = await getUsers(db);
 
-console.log(demo_users
-, "demo")
-
 function App() { 
-  
+  const [currentUser, setCurrentUser] = useState(null);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user)
+     })
+  }, [])
+
   return (
+    <>
+    <AuthProvider value={{currentUser}}></AuthProvider>
     <div>
      <h1>{demo_users[0].name}</h1>
      <h2>{demo_users[0].inputs_count}</h2>
+     <Register />
     </div>
+    <AuthProvider />
+    </>
   )
 }
 
