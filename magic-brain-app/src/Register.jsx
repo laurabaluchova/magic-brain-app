@@ -2,7 +2,8 @@ import { useState } from "react";
 import "./forms.css";
 import { auth } from "./App";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
 // import {useAuthValue} from './AuthContext'
 
 function Register() {
@@ -103,8 +104,8 @@ function Register() {
           </button>
         </form>
         <span>
-          Already have an account?
-          {/* <Link to='/login'>login</Link> */}
+          
+          <Link to='/'>Already have an account?</Link>
         </span>
       </div>
     </div>

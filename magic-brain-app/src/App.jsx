@@ -4,7 +4,9 @@ import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
 import Register from './Register';
 import {useState, useEffect} from 'react';
-import {AuthProvider} from './AuthContext';
+// import {AuthProvider} from './AuthProvider';
+import Header from './Components/Header';
+import Login from './Components/Login';
 
 
 const firebaseConfig = {
@@ -37,22 +39,24 @@ return userList;
 const demo_users = await getUsers(db);
 
 function App() { 
-  const [currentUser, setCurrentUser] = useState(null);
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user)
-     })
-  }, [])
+  // const [currentUser, setCurrentUser] = useState(null);
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     setCurrentUser(user)
+  //    })
+  // }, [])
 
   return (
     <>
-    <AuthProvider value={{currentUser}}></AuthProvider>
+    {/* <AuthProvider value={{currentUser}}> */}
     <div>
-     <h1>{demo_users[0].name}</h1>
-     <h2>{demo_users[0].inputs_count}</h2>
-     <Register />
+    <Header />
+     {/* <h1>{demo_users[0].name}</h1>
+     <h2>{demo_users[0].inputs_count}</h2> */}
+     <Login/>
+     <Register />    
     </div>
-    <AuthProvider />
+    {/* <AuthProvider /> */}
     </>
   )
 }
