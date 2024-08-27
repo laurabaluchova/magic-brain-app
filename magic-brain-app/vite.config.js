@@ -9,6 +9,7 @@ export default defineConfig({
       '/api': {
         target: 'https://ai-brain-server.onrender.com',
         changeOrigin: true,
+        secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),        
       },
     },
