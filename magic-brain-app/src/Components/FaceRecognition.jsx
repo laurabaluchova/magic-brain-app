@@ -79,13 +79,15 @@ const FaceRecignition = () => {
       }
 
       return (
-        <div>
-            <p className="f4">
+        <div className="flex flex-col items-center h-screen">
+            <p className="text-lg">
         {`Detect faces in your pictures with this Magic Brain App`}
       </p>
-      <div className="center ma ">
-        <div className="absolute mt4">
+      
+       
         <ImageLinkForm onInputChange={onInputChange} onSubmit={onSubmit} input={input} validateUrl={validateUrl}/>
+        <div className="absolute mt-6">
+        <div className="mx-auto m-4">
         {validateUrl(input) && (
             <img
               id="inputimage"
@@ -109,8 +111,8 @@ const FaceRecignition = () => {
             ></div>
           ))}     
           </div>   
-        
-      </div>
+          </div>
+      
 
         </div>
       )
