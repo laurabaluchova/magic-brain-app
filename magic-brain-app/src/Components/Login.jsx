@@ -7,7 +7,6 @@ const Login = () => {
   const { loginUser, loading, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // If authentication is still loading, display a loading indicator
   if (loading) {
     return (
       <span className="loading loading-dots loading-lg flex item-center mx-auto"></span>
@@ -67,10 +66,10 @@ const Login = () => {
                   />
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-primary">Login</button>
+                  <button className="btn btn-primary mb-2">Login</button>
                 </div>
                 <span>          
-          <Link to='/register'>Do not have an account?</Link>
+          <Link className="underline" to='/register'>Create account</Link>
         </span>
               </form>
             </div>

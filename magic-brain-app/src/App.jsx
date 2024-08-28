@@ -2,7 +2,7 @@ import './App.css'
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
-import Register from './Register';
+import Register from './Components/Register';
 import {useState, useEffect} from 'react';
 // import {AuthProvider} from './AuthProvider';
 import Header from './Components/Header';

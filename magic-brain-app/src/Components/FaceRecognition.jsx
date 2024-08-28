@@ -1,10 +1,12 @@
 import { useState } from "react";
-import "./FaceRecognition.css";
+// import "./FaceRecognition.css";
 import ImageLinkForm from "./ImageLinkForm";
+import { auth } from "../App";
 
-const FaceRecignition = () => {
+const FaceRecognition = () => {
     const [box, setBox] = useState([]);
     const [input, setInput] = useState("");
+    const userName = auth.currentUser.displayName;
 
     const displayFaceBox = (box) => {
         setBox(box);
@@ -79,22 +81,25 @@ const FaceRecignition = () => {
       }
 
       return (
-        <div className="flex flex-col items-center h-screen">
+        <div className="flex flex-col items-center h-screen ">
             <p className="text-lg">
-        {`Detect faces in your pictures with this Magic Brain App`}
-      </p>
-      
-       
+        {`${userName}, recognize faces in the picture with this Magic Brain App`}
+      </p>      
+       <div className="flex flex-col items-center space-y-12">
         <ImageLinkForm onInputChange={onInputChange} onSubmit={onSubmit} input={input} validateUrl={validateUrl}/>
-        <div className="absolute mt-6">
-        <div className="mx-auto m-4">
+
+        
+        
+        <div className="absolute">
+        {/* <div className="mx-auto m-10"> */}
+        
         {validateUrl(input) && (
             <img
               id="inputimage"
               alt=""
               src={input}
               width="500px"
-              height="auto"              
+              height="auto"                         
             ></img>
           )}
           {box.map((item) => (
@@ -110,7 +115,8 @@ const FaceRecignition = () => {
               }}
             ></div>
           ))}     
-          </div>   
+          {/* </div>    */}
+          </div>
           </div>
       
 
@@ -120,4 +126,4 @@ const FaceRecignition = () => {
 
 };
 
-export default FaceRecignition;
+export default FaceRecognition;

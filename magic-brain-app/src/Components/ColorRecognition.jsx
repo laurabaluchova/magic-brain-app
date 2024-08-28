@@ -1,10 +1,12 @@
 import ImageLinkForm from "./ImageLinkForm";
 import { useState } from "react";
 import ColorSwatch from "./ColorSwatch";
+import { auth } from "../App";
 
 const ColorRecognition = () => {
   const [input, setInput] = useState("");
   const [imageColors, setImageColors] = useState("");
+  const userName = auth.currentUser.displayName
 
   const prepareColorsArray = (data) => {
     let colorsArray = [];
@@ -61,7 +63,7 @@ const ColorRecognition = () => {
   return (
     <div className="flex flex-col items-center h-screen">
       <p className="text-lg">
-        {`Detect main color in your pictures with this Magic Brain App`}
+        {`${userName}, detect main color in the picture with this Magic Brain App`}
       </p>
       <ImageLinkForm
         onInputChange={onInputChange}

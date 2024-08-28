@@ -1,15 +1,26 @@
 import { auth } from "./App";
-import FaceRecignition from "./Components/FaceRecognition";
+import FaceRecognition from "./Components/FaceRecognition";
 import ColorRecognition from "./Components/ColorRecognition";
+import Register from "./Components/Register";
+import CrossRoad from "./Components/CrossRoad";
 
-function Homepage() {
-    const userName = auth.currentUser.displayName
+function Homepage() {     
 
     return (
-        < > 
-        <h1>Welcome {userName}</h1>
-        <FaceRecignition />
-        </>
+        <div > 
+            <div>
+      {
+        auth.currentUser ? (
+          <>            
+            <CrossRoad />
+          </>
+        ) : (
+          <Register />
+        )
+      }
+    </div>
+        </div>
+          
     )
 };
 

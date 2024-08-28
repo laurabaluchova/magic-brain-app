@@ -1,27 +1,29 @@
 const ImageLinkForm = ({ onInputChange, onSubmit, input, validateUrl} ) => {
   
   return (
-    <div>   
+    <div className="mb-6">   
      
-        <div >
+       
+     <label htmlFor="name" className="block text-black text-sm font-medium mb-2">Insert image URL</label>
           <input
             
             type="text"
             placeholder="Insert image URL here"
             value={input}
             onChange={onInputChange}
+            className="text-black text-lg font-medium mb-2 border p-2"
           />
           <button
-            className="button w-30 grow f4 link ph3 pv2 dib white bg-purple pointer"
+            className="bg-black text-white px-4 py-2 rounded hover:bg-gray-600"
             onClick={onSubmit}
           >
             {/* {ctx.isLoading ? "Loading..." : "Detect"} */}
             Detect
           </button>
-        </div>
+        
         
       {!validateUrl(input) && (
-          <p className="gold">Enter valid URL with ending jpg, jpeg or png</p>
+          <p>Enter valid URL with ending jpg, jpeg or png</p>
          )}
     
     </div>
