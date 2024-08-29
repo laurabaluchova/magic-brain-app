@@ -141,7 +141,7 @@ const Header = () => {
   return loading ? (
     <span className="loading loading-dots loading-lg flex item-center mx-auto"></span>
   ) : (
-    <div className="navbar flex justify-between items-center bg-base-100 m-3">
+    <div className="navbar flex justify-between items-center bg-base-100 m-3 mb-6  border-b border-b-2">
       <div className="flex">
         <a
           className="btn bg-white hover:bg-white border-0 text-xl"

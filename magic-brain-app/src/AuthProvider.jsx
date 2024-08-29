@@ -41,9 +41,17 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logOut = () => {
-    setLoading(true);
-    return signOut(auth);
+  const logOut = async () => {
+    try {
+      setLoading(true); 
+      await signOut(auth); 
+      setUser(null); 
+      console.log("User logged out successfully");
+    } catch (error) {
+      console.error("Error logging out: ", error);
+    } finally {
+      setLoading(false); 
+    }
   };
 
   useEffect(() => {

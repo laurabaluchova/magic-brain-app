@@ -66,7 +66,7 @@ const Login = () => {
                   />
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-primary mb-2">Login</button>
+                  <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-600 flex-shrink-0 text-xl">Login</button>
                 </div>
                 <span>          
           <Link className="underline" to='/register'>Create account</Link>

@@ -7,6 +7,7 @@ const FaceRecognition = () => {
   const [box, setBox] = useState([]);
   const [input, setInput] = useState("");
   const userName = auth.currentUser.displayName;
+  const [loading, setLoading] = useState({isLoading: false, cursor: "cursor-default"})
 
   const displayFaceBox = (box) => {
     setBox(box);
@@ -53,8 +54,7 @@ const FaceRecognition = () => {
   async function onSubmit() {
     console.log("click");
     if (input !== "" && validateUrl(input)) {
-      //   setIsLoading(true);
-      //   setCursor("wait");
+      setLoading({isLoading: true, cursor: "cursor-wait"})      
 
       let response = await fetch(`/api/imageurl`, {
         method: "post",
@@ -78,10 +78,11 @@ const FaceRecognition = () => {
     } else {
       console.log("incorrect image url");
     }
+    setLoading({isLoading: false, cursor: "cursor-default"})
   }
 
   return (
-    <div className="h-screen">
+    <div className={`h-screen ${loading.cursor}`}>
       <h1 className="text-h1 m-4">
         {`${userName}, `}
         <span className="font-bold text-customOrange">recognize faces</span>
@@ -94,6 +95,7 @@ const FaceRecognition = () => {
           onSubmit={onSubmit}
           input={input}
           validateUrl={validateUrl}
+          loading={loading.isLoading}
         />
 
         {/* Container for the image and bounding boxes */}
