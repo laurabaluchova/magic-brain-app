@@ -20,28 +20,46 @@ const Header = () => {
       {!user && (
         <>
           <li>
-            <a
-              onClick={() => {
-                navigate("/login");
+          <NavLink
+              className={({ isActive }) => {
+                const baseClasses = "px-4 py-2 rounded transition-colors duration-300";
+                const activeClasses = "bg-black text-white";
+                const defaultClasses = "bg-transparent text-black";
+                const hoverClasses = "hover:text-white hover:bg-black"; 
+                const focusClasses = "focus:outline-none focus:bg-black focus:text-white"; // Remove default focus outline
+            
+                return isActive
+                  ? `${baseClasses} ${activeClasses}`
+                  : `${baseClasses} ${defaultClasses} ${hoverClasses} ${focusClasses}`;
               }}
+              to="/login"
             >
               Log In
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a
-              onClick={() => {
-                navigate("/register");
+          <NavLink
+              className={({ isActive }) => {
+                const baseClasses = "px-4 py-2 rounded transition-colors duration-300";
+                const activeClasses = "bg-black text-white";
+                const defaultClasses = "bg-transparent text-black";
+                const hoverClasses = "hover:text-white hover:bg-black"; 
+                const focusClasses = "focus:outline-none focus:bg-black focus:text-white"; // Remove default focus outline
+            
+                return isActive
+                  ? `${baseClasses} ${activeClasses}`
+                  : `${baseClasses} ${defaultClasses} ${hoverClasses} ${focusClasses}`;
               }}
+              to="/register"
             >
               Register
-            </a>
+            </NavLink>
           </li>
         </>
       )}
       {user && (
         <>
-          <li className="hover:bg-customOrange rounded-md">
+          <li>
             {/* <a
               className="hover:text-white"
               onClick={() => {
@@ -52,12 +70,14 @@ const Header = () => {
             </a> */}
             <NavLink
               className={({ isActive }) => {
-                const baseClasses = "px-4 py-2 rounded transition-colors duration-300";
+                const baseClasses =
+                  "px-4 py-2 rounded transition-colors duration-300";
                 const activeClasses = "bg-customOrange text-white";
-                const defaultClasses = "bg-transparent text-gray-500";
-                const hoverClasses = "hover:text-white hover:bg-customOrange"; // Hover effect
-                const focusClasses = "focus:outline-none"; // Remove default focus outline
-            
+                const defaultClasses = "bg-transparent text-black";
+                const hoverClasses = "hover:text-white hover:bg-customOrange";
+                const focusClasses =
+                  "focus:outline-none focus:bg-customOrange focus:text-white";
+
                 return isActive
                   ? `${baseClasses} ${activeClasses}`
                   : `${baseClasses} ${defaultClasses} ${hoverClasses} ${focusClasses}`;
@@ -67,28 +87,52 @@ const Header = () => {
               Face Recognition
             </NavLink>
           </li>
-          <li className="hover:bg-customBlue rounded-md ">
-            <a
-              className="hover:text-white"
-              onClick={() => {
-                navigate("/colors");
+          <li>
+            <NavLink
+              className={({ isActive }) => {
+                const baseClasses =
+                  "px-4 py-2 rounded transition-colors duration-300";
+                const activeClasses = "bg-customBlue text-white";
+                const defaultClasses = "bg-transparent text-black";
+                const hoverClasses = "hover:text-white hover:bg-customBlue";
+                const focusClasses =
+                  "focus:outline-none focus:bg-customBlue focus:text-white";
+
+                return isActive
+                  ? `${baseClasses} ${activeClasses}`
+                  : `${baseClasses} ${defaultClasses} ${hoverClasses} ${focusClasses}`;
               }}
+              to="/colors"
             >
               Color Detection
-            </a>
+            </NavLink>
+          </li>
+
+          <li>
+          <NavLink
+              className={({ isActive }) => {
+                const baseClasses = "px-4 py-2 rounded transition-colors duration-300";
+                const activeClasses = "bg-black text-white";
+                const defaultClasses = "bg-transparent text-black";
+                const hoverClasses = "hover:text-white hover:bg-black"; 
+                const focusClasses = "focus:outline-none focus:bg-black focus:text-white"; // Remove default focus outline
+            
+                return isActive
+                  ? `${baseClasses} ${activeClasses}`
+                  : `${baseClasses} ${defaultClasses} ${hoverClasses} ${focusClasses}`;
+              }}
+              to="/"
+            >
+              Settings
+            </NavLink>
           </li>
           <li>
-            <details>
-              <summary>Profile</summary>
-              <ul className="bg-base-100 rounded-t-none p-2">
-                <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <a onClick={handleSingOut}>Sign Out</a>
-                </li>
-              </ul>
-            </details>
+          <a
+              className="px-4 py-2 rounded bg-transparent text-black hover:bg-black hover:text-white hover:cursor-pointer"
+              onClick={handleSingOut}
+            >
+              Sign Out
+            </a>
           </li>
         </>
       )}
@@ -97,8 +141,8 @@ const Header = () => {
   return loading ? (
     <span className="loading loading-dots loading-lg flex item-center mx-auto"></span>
   ) : (
-    <div className="navbar bg-base-100 m-3">
-      <div className="flex-1">
+    <div className="navbar flex justify-between items-center bg-base-100 m-3">
+      <div className="flex">
         <a
           className="btn bg-white hover:bg-white border-0 text-xl"
           onClick={() => {
@@ -109,8 +153,8 @@ const Header = () => {
           Magic Brain App
         </a>
       </div>
-      <div className="flex-none">
-        <ul className="menu menu-horizontal px-1">{navLinks}</ul>
+      <div>
+        <ul className="px-1 flex gap-4 ml-auto">{navLinks}</ul>
       </div>
     </div>
   );
