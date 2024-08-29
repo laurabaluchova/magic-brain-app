@@ -19,7 +19,7 @@ const CrossRoad = () => {
         <div className="bg-gray-100 p-4 text-center">
           {/* <!-- Card Footer --> */}
           <button
-            className="bg-black text-white px-4 py-2 rounded hover:bg-gray-600" 
+            className="bg-black text-white px-4 py-2 rounded hover:bg-customOrange" 
           >
             Recognize Faces
           </button>
@@ -40,7 +40,7 @@ const CrossRoad = () => {
         <div className="bg-gray-100 p-4 text-center">
           {/* <!-- Card Footer --> */}
           <button
-            className="bg-black text-white px-4 py-2 rounded hover:bg-gray-600"
+            className="bg-black text-white px-4 py-2 rounded hover:bg-customBlue"
             onClick={() => {
               navigate("/colors");
             }}

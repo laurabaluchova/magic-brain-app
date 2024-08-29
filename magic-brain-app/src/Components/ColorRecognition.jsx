@@ -6,7 +6,7 @@ import { auth } from "../App";
 const ColorRecognition = () => {
   const [input, setInput] = useState("");
   const [imageColors, setImageColors] = useState("");
-  const userName = auth.currentUser.displayName
+  const userName = auth.currentUser.displayName;
 
   const prepareColorsArray = (data) => {
     let colorsArray = [];
@@ -61,28 +61,34 @@ const ColorRecognition = () => {
   }
 
   return (
-    <div className="flex flex-col items-center h-screen">
-      <p className="text-lg">
-        {`${userName}, detect main color in the picture with this Magic Brain App`}
-      </p>
-      <ImageLinkForm
-        onInputChange={onInputChange}
-        onSubmit={onSubmit}
-        input={input}
-        validateUrl={validateUrl}
-      />
+    <div className=" h-screen">
+      <h1 className="text-h1 m-4">
+        {`${userName}, `}
+        <span className="font-bold text-customBlue">detect main color</span>
+        {" in the picture"}
+      </h1>
 
-      {validateUrl(input) && <ColorSwatch imageColors={imageColors} />}
+      <div className="flex flex-col items-center gap-2">
+        <ImageLinkForm
+          onInputChange={onInputChange}
+          onSubmit={onSubmit}
+          input={input}
+          validateUrl={validateUrl}
+        />
+        <div className="relative">
+          {validateUrl(input) && <ColorSwatch imageColors={imageColors} />}
 
-      {validateUrl(input) && (
-        <img
-          id="inputimage"
-          alt=""
-          src={input}
-          width="500px"
-          height="auto"
-        ></img>
-      )}
+          {validateUrl(input) && (
+            <img
+              id="inputimage"
+              alt=""
+              src={input}
+              width="500px"
+              height="auto"
+            ></img>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

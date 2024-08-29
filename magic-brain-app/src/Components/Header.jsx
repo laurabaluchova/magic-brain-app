@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthProvider";
 
 const Header = () => {
@@ -41,17 +41,35 @@ const Header = () => {
       )}
       {user && (
         <>
-          <li>
-            <a
+          <li className="hover:bg-customOrange rounded-md">
+            {/* <a
+              className="hover:text-white"
               onClick={() => {
                 navigate("/faces");
               }}
             >
               Face Recognition
-            </a>
+            </a> */}
+            <NavLink
+              className={({ isActive }) => {
+                const baseClasses = "px-4 py-2 rounded transition-colors duration-300";
+                const activeClasses = "bg-customOrange text-white";
+                const defaultClasses = "bg-transparent text-gray-500";
+                const hoverClasses = "hover:text-white hover:bg-customOrange"; // Hover effect
+                const focusClasses = "focus:outline-none"; // Remove default focus outline
+            
+                return isActive
+                  ? `${baseClasses} ${activeClasses}`
+                  : `${baseClasses} ${defaultClasses} ${hoverClasses} ${focusClasses}`;
+              }}
+              to="/faces"
+            >
+              Face Recognition
+            </NavLink>
           </li>
-          <li>
+          <li className="hover:bg-customBlue rounded-md ">
             <a
+              className="hover:text-white"
               onClick={() => {
                 navigate("/colors");
               }}
@@ -79,14 +97,15 @@ const Header = () => {
   return loading ? (
     <span className="loading loading-dots loading-lg flex item-center mx-auto"></span>
   ) : (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 m-3">
       <div className="flex-1">
         <a
-          className="btn btn-ghost text-xl"
+          className="btn bg-white hover:bg-white border-0 text-xl"
           onClick={() => {
             navigate("/");
           }}
         >
+          <img className="h-6" src="/brain.png" />
           Magic Brain App
         </a>
       </div>
