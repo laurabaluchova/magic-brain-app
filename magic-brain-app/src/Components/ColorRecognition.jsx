@@ -35,7 +35,7 @@ const ColorRecognition = () => {
 
   async function onSubmit() {
     console.log("click");
-    if (input !== "" && validateUrl(input)) {
+    if (input !== "" ) {
       setLoading({isLoading: true, cursor: "cursor-wait"})
 
       let response = await fetch(`/api/imageurl`, {
@@ -78,9 +78,10 @@ const ColorRecognition = () => {
           loading={loading.isLoading}
         />
         <div className="relative">
-          {validateUrl(input) && <ColorSwatch imageColors={imageColors} />}
+          {/* {validateUrl(input) && <ColorSwatch imageColors={imageColors} />} */}
+          <ColorSwatch imageColors={imageColors} />
 
-          {validateUrl(input) && (
+          {/* {validateUrl(input) && ( */}
             <img
               id="inputimage"
               alt=""
@@ -88,7 +89,7 @@ const ColorRecognition = () => {
               width="500px"
               height="auto"
             ></img>
-          )}
+          {/* )} */}
         </div>
       </div>
     </div>

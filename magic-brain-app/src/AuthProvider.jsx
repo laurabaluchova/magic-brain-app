@@ -36,9 +36,24 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const loginUser = (email, password) => {
-    setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+  // const loginUser = (email, password) => {
+  //   setLoading(true);
+  //   return signInWithEmailAndPassword(auth, email, password);    
+  // };
+
+  const loginUser = async (email, password) => {
+    try {       
+      const logggedInUser = await signInWithEmailAndPassword(auth, email, password); 
+      setLoading(true); 
+      return logggedInUser;
+      
+    } catch (error) {
+      setLoading(false)
+      console.error("Error logging out: ", error);
+    }
+    // } finally {
+    //   setLoading(false); 
+    // }
   };
 
   const logOut = async () => {

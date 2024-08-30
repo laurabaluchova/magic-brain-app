@@ -9,7 +9,7 @@ import Header from './Components/Header.jsx';
 import Register from './Components/Register.jsx';
 import ColorRecognition from './Components/ColorRecognition.jsx';
 import FaceRecognition from './Components/FaceRecognition.jsx';
-import CrossRoad from './Components/CrossRoad.jsx';
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

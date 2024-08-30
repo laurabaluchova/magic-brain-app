@@ -154,7 +154,7 @@ const Register = () => {
   //   e.target.reset();
   // };
 
-  const register = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     // setError("");
     const name = e.target.name.value;
@@ -193,63 +193,59 @@ const Register = () => {
 
   return (
     <div>
-      <body className="bg-gray-100 flex items-center justify-center min-h-screen">
-        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-          <h2 className="text-2xl font-bold text-center text-black mb-6">
-            Register
-          </h2>
-          <form onSubmit={register}>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Name</span>
-              </label>
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control mt-6">
-              <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-600 flex-shrink-0 text-xl">
-                Register
-              </button>
-            </div>
+      <div className="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden flex flex-col h-full">
+        <div className="bg-black text-white text-center py-4 px-6">
+          {/* <!-- Card Header --> */}
+          <h2 className="text-xl font-semibold">Registration Form</h2>
+        </div>
+        <form onSubmit={handleRegister}>
+          <div className="form-control p-3">
+            <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control p-3">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control p-3">
+            <label className="label">
+              <span className="label-text">Password</span>
+            </label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              className="input input-bordered"
+            />
+          </div>
+          <div className="bg-gray-100 p-4 text-center flex flex-col gap-2">
+            {/* <!-- Card Footer --> */}
+            <button className="bg-black text-white px-4 py-2 rounded hover:bg-customBlue">
+              Register
+            </button>
             <span>
               <Link className="underline" to="/login">
                 I have an account
               </Link>
             </span>
-          </form>
-        </div>
-      </body>
+          </div>
+        </form>
+      </div>
     </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 

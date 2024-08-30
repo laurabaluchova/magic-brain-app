@@ -19,14 +19,14 @@ const Login = () => {
 //   }
 
   // Handle form submission for user login
-  const handleFormSubmit = (e) => {
+  const handleLogIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     loginUser(email, password)
       .then((result) => {
         console.log(result);
-        navigate("/profile");
+        if (result.user.uid){navigate("/profile")};
       })
       .catch((error) => console.log(error.message));
 
@@ -35,13 +35,14 @@ const Login = () => {
 
   return (
     <div>        
-      <div className="min-h-screen bg-base-200">
-        <div className="hero-content flex-col">
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <div className="card-body">
-            <div className="text-xl font-bold">Log In</div>
-              <form onSubmit={handleFormSubmit}>
-                <div className="form-control">
+      <div className="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden flex flex-col h-full">
+        
+            <div className="bg-black text-white text-center py-4 px-6">
+          {/* <!-- Card Header --> */}
+          <h2 className="text-xl font-semibold">Login Form</h2>
+        </div>
+              <form onSubmit={handleLogIn}>
+                <div className="form-control p-3">
                   <label className="label">
                     <span className="label-text">Email</span>
                   </label>
@@ -52,7 +53,7 @@ const Login = () => {
                     className="input input-bordered"
                   />
                 </div>
-                <div className="form-control">
+                <div className="form-control p-3">
                   <label className="label">
                     <span className="label-text">Password</span>
                   </label>
@@ -65,18 +66,21 @@ const Login = () => {
                     className="input input-bordered"
                   />
                 </div>
-                <div className="form-control mt-6">
-                  <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-600 flex-shrink-0 text-xl">Login</button>
-                </div>
-                <span>          
-          <Link className="underline" to='/register'>Create account</Link>
-        </span>
+                <div className="bg-gray-100 p-4 text-center flex flex-col gap-2">
+            {/* <!-- Card Footer --> */}
+            <button className="bg-black text-white px-4 py-2 rounded hover:bg-customBlue">
+              Log In
+            </button>
+            <span>
+              <Link className="underline" to="/register">
+                Create Account
+              </Link>
+            </span>
+          </div>
               </form>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        
   );
 };
 
