@@ -14,58 +14,82 @@
 //   return useContext(AuthContext)
 // }
 
-
-
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
-import {auth }from "./App";
+import { auth } from "./App";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [registrationError, setRegistrationError] = useState({});
+  const [loginError, setLoginError] = useState({});
 
-  const createUser = (email, password) => {
-    setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+
+
+  const createUser = async (email, password, name) => {
+    try {
+      if (email !== "" && password !== "" && name !== "") {
+        setRegistrationError({})
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user; 
+      const userWithName = await updateProfile(user, { displayName: name });   
+      setLoading(true);
+      
+      return userWithName
+    } else {
+      setRegistrationError({message: "Some inputs seem to be empty"})
+      return
+    }
+      
+    } catch (error) {      
+      console.error("Error signing in: ", error);  
+      setRegistrationError(error)    
+    }  finally {
+      setLoading(false);
+    }
   };
 
-  // const loginUser = (email, password) => {
-  //   setLoading(true);
-  //   return signInWithEmailAndPassword(auth, email, password);    
-  // };
-
   const loginUser = async (email, password) => {
-    try {       
-      const logggedInUser = await signInWithEmailAndPassword(auth, email, password); 
-      setLoading(true); 
+    try {
+      const logggedInUser = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      setLoading(true);
+      setLoginError({})
       return logggedInUser;
-      
-    } catch (error) {
-      setLoading(false)
-      console.error("Error logging out: ", error);
+    } catch (error) {      
+      console.error("Error logging in: ", error);
+      setLoginError(error)
+    } finally {
+      setLoading(false);
     }
-    // } finally {
-    //   setLoading(false); 
-    // }
   };
 
   const logOut = async () => {
     try {
-      setLoading(true); 
-      await signOut(auth); 
-      setUser(null); 
+      setLoading(true);
+      await signOut(auth);
+      setUser(null);
       console.log("User logged out successfully");
     } catch (error) {
       console.error("Error logging out: ", error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -86,10 +110,15 @@ const AuthProvider = ({ children }) => {
     loginUser,
     logOut,
     loading,
+    registrationError,
+    setRegistrationError,
+    loginError, 
+    setLoginError
   };
 
-  return <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>
+  );
 };
-
 
 export default AuthProvider;

@@ -65,7 +65,7 @@ const ColorRecognition = () => {
     <div className={`h-screen ${loading.cursor}`}>
       <h1 className="text-h1 m-4">
         {`${userName}, `}
-        <span className="font-bold text-customBlue">detect main color</span>
+        <span className="font-bold text-customBlue">let AI detect main color</span>
         {" in the picture"}
       </h1>
 

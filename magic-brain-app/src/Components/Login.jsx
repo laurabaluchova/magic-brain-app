@@ -1,11 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const { loginUser, loading, user } = useContext(AuthContext);
+  const { loginUser, loading, user, loginError, setLoginError } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setLoginError({})
+  }, [setLoginError]);
+
 
   if (loading) {
     return (
@@ -27,8 +32,7 @@ const Login = () => {
       .then((result) => {
         console.log(result);
         if (result.user.uid){navigate("/profile")};
-      })
-      .catch((error) => console.log(error.message));
+      })      
 
     e.target.reset();
   };
@@ -68,12 +72,13 @@ const Login = () => {
                 </div>
                 <div className="bg-gray-100 p-4 text-center flex flex-col gap-2">
             {/* <!-- Card Footer --> */}
+            <p className="text-customOrange font-bold text-xl">{loginError.message}</p>
             <button className="bg-black text-white px-4 py-2 rounded hover:bg-customBlue">
               Log In
             </button>
             <span>
               <Link className="underline" to="/register">
-                Create Account
+                Create account
               </Link>
             </span>
           </div>

@@ -85,7 +85,7 @@ const FaceRecognition = () => {
     <div className={`h-screen ${loading.cursor}`}>
       <h1 className="text-h1 m-4">
         {`${userName}, `}
-        <span className="font-bold text-customOrange">recognize faces</span>
+        <span className="font-bold text-customOrange">let AI recognize faces</span>
         {" in the picture"}
       </h1>
 

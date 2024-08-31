@@ -1,27 +1,27 @@
-import { auth } from "./App";
-import FaceRecognition from "./Components/FaceRecognition";
-import ColorRecognition from "./Components/ColorRecognition";
-import Register from "./Components/Register";
-import CrossRoad from "./Components/CrossRoad";
+import{ useState, useEffect } from 'react';
+import { auth } from './App';
+import Register from './Components/Register';
+import CrossRoad from './Components/CrossRoad';
 
-function Homepage() {     
 
-    return (
-        <div > 
-            <div>
-      {
-        auth.currentUser ? (
-          <>            
-            <CrossRoad />
-          </>
-        ) : (
-          <Register />
-        )
-      }
+function Homepage() {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    // Set up the listener for authentication state changes
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user); // Update the currentUser state
+    });
+
+    // Clean up the listener on component unmount
+    return () => unsubscribe();
+  }, []);
+
+  return (
+    <div>
+      {currentUser ? <CrossRoad /> : <Register />}
     </div>
-        </div>
-          
-    )
-};
+  );
+}
 
 export default Homepage;
