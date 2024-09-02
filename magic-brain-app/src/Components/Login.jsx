@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const { loginUser, loading, user, loginError, setLoginError } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+   
 
   useEffect(() => {
     setLoginError({})
@@ -24,18 +27,13 @@ const Login = () => {
 //   }
 
   // Handle form submission for user login
-  const handleLogIn = (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    loginUser(email, password)
-      .then((result) => {
-        console.log(result);
-        if (result.user.uid){navigate("/profile")};
-      })      
+  const handleLogIn = async (e) => {
+    e.preventDefault();    
+    const loggedUser = await loginUser(email, password);      
+        if (loggedUser.user.uid){navigate("/profile")};
+       
 
-    e.target.reset();
-  };
+    };
 
   return (
     <div>        
@@ -45,7 +43,7 @@ const Login = () => {
           {/* <!-- Card Header --> */}
           <h2 className="text-xl font-semibold">Login Form</h2>
         </div>
-              <form onSubmit={handleLogIn}>
+              <form >
                 <div className="form-control p-3">
                   <label className="label">
                     <span className="label-text">Email</span>
@@ -55,6 +53,7 @@ const Login = () => {
                     name="email"
                     placeholder="Email"
                     className="input input-bordered"
+                    onChange={(e) => {setEmail(e.target.value)} }
                   />
                 </div>
                 <div className="form-control p-3">
@@ -63,17 +62,16 @@ const Login = () => {
                   </label>
                   <input
                     type="password"
-
-
                     name="password"
                     placeholder="Password"
                     className="input input-bordered"
+                    onChange={(e) => {setPassword(e.target.value)} }
                   />
                 </div>
                 <div className="bg-gray-100 p-4 text-center flex flex-col gap-2">
             {/* <!-- Card Footer --> */}
             <p className="text-customOrange font-bold text-xl">{loginError.message}</p>
-            <button className="bg-black text-white px-4 py-2 rounded hover:bg-customBlue">
+            <button className="bg-black text-white px-4 py-2 rounded hover:bg-customBlue" onClick={handleLogIn}>
               Log In
             </button>
             <span>

@@ -5,7 +5,7 @@ import { AuthContext } from "../AuthProvider";
 const Header = () => {
   const { user, logOut, loading } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to handle menu toggle
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSignOut = () => {
     logOut()
@@ -89,8 +89,8 @@ const Header = () => {
   return loading ? (
     <span className="loading loading-dots loading-lg flex item-center mx-auto"></span>
   ) : (
-    <div className="navbar flex flex-col md:flex-row justify-between items-center bg-base-100 m-3 mb-6 border-b border-b-2">
-      <div className="flex items-center justify-between w-full md:w-auto">
+    <div className="navbar flex flex-col lg:flex-row justify-between items-center bg-base-100 m-3 mb-6 border-b border-b-2">
+      <div className="flex items-center justify-between w-full lg:w-auto">
         <a
           className="btn bg-white hover:bg-white border-0 text-xl"
           onClick={() => {
@@ -102,7 +102,7 @@ const Header = () => {
         </a>
         {/* Toggle button for mobile menu */}
         <button
-          className="md:hidden block text-black hover:text-white hover:bg-black p-2 rounded"
+          className="lg:hidden block text-black hover:text-white hover:bg-black p-2 rounded"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {/* Hamburger icon */}
@@ -124,11 +124,11 @@ const Header = () => {
       </div>
       {/* Menu for larger screens and conditionally shown menu for smaller screens */}
       <div
-        className={`w-full md:flex md:items-center md:static ${
+        className={`${
           isMenuOpen ? "block" : "hidden"
-        } md:w-auto transition-all duration-300`}
+        } w-full lg:flex lg:items-center lg:space-x-4 lg:w-auto transition-all duration-300`}
       >
-        <ul className="flex flex-col md:flex-row gap-4 mt-4 md:mt-0 md:gap-4 ml-auto">
+        <ul className="flex flex-col lg:flex-row gap-4 mt-4 lg:mt-0">
           {navLinks}
         </ul>
       </div>

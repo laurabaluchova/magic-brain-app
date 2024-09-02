@@ -5,9 +5,14 @@ import { useNavigate, Link } from "react-router-dom";
 const Register = () => {  
   const { createUser, user, loading, registrationError, setRegistrationError } = useContext(AuthContext);
   const navigate = useNavigate();
-  
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+   
   useEffect(() => {
     setRegistrationError({})
+    console.log("bug")
   }, [setRegistrationError]);
 
 
@@ -24,16 +29,10 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     console.log("reg")
-    e.preventDefault();       
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    createUser(email, password, name)
-      .then((result) => {
-        if (result){navigate("/profile")};
-      });   
-
-    e.target.reset();
+    e.preventDefault();      
+    
+    const user = await createUser(email, password, name);      
+        if (user){navigate("/profile")};   
   };
 
   return (
@@ -43,7 +42,7 @@ const Register = () => {
           {/* <!-- Card Header --> */}
           <h2 className="text-xl font-semibold">Registration Form</h2>
         </div>
-        <form onSubmit={handleRegister}>
+        <form>
           <div className="form-control p-3">
             <label className="label">
               <span className="label-text">Name</span>
@@ -53,6 +52,7 @@ const Register = () => {
               name="name"
               placeholder="Name"
               className="input input-bordered"
+              onChange={(e) => {setName(e.target.value)} }
             />
           </div>
           <div className="form-control p-3">
@@ -64,6 +64,7 @@ const Register = () => {
               name="email"
               placeholder="Email"
               className="input input-bordered"
+              onChange={(e) => {setEmail(e.target.value)} }
             />
           </div>
           <div className="form-control p-3">
@@ -75,12 +76,13 @@ const Register = () => {
               name="password"
               placeholder="Password"
               className="input input-bordered"
+              onChange={(e) => {setPassword(e.target.value)} }
             />
           </div>
           <div className="bg-gray-100 p-4 text-center flex flex-col gap-2">
             {/* <!-- Card Footer --> */}
             <p className="text-customOrange font-bold text-xl">{registrationError.message}</p>
-            <button className="bg-black text-white px-4 py-2 rounded hover:bg-customBlue" >
+            <button className="bg-black text-white px-4 py-2 rounded hover:bg-customBlue" onClick={handleRegister}>
               Register
             </button>
             <span>

@@ -7,7 +7,8 @@ const FaceRecognition = () => {
   const [box, setBox] = useState([]);
   const [input, setInput] = useState("");
   const userName = auth.currentUser.displayName;
-  const [loading, setLoading] = useState({isLoading: false, cursor: "cursor-default"})
+  const [loading, setLoading] = useState({isLoading: false, cursor: "cursor-default"});
+  const [error, setError] = useState("");
 
   const displayFaceBox = (box) => {
     setBox(box);
@@ -43,6 +44,7 @@ const FaceRecognition = () => {
 
   const onInputChange = (event) => {
     setInput(event.target.value);
+    setError("")    
     setBox([]);
   };
 
@@ -53,7 +55,8 @@ const FaceRecognition = () => {
 
   async function onSubmit() {
     console.log("click");
-    if (input !== "" && validateUrl(input)) {
+    setError("");
+    if (input !== "") {
       setLoading({isLoading: true, cursor: "cursor-wait"})      
 
       let response = await fetch(`/api/imageurl`, {
@@ -70,10 +73,13 @@ const FaceRecognition = () => {
 
       let fetchedData = await response.json();
       console.log(fetchedData);
-      if (fetchedData) {
+      if (fetchedData && fetchedData.outputs[0].data.regions.length !== 0) {
         displayFaceBox(
           calculateFaceLocation(prepareLocationsArray(fetchedData))
         );
+      }
+      else if (fetchedData && fetchedData.outputs[0].data.regions.length === 0) {
+        setError("There was not recognized any face")
       }
     } else {
       console.log("incorrect image url");
@@ -94,13 +100,14 @@ const FaceRecognition = () => {
           onInputChange={onInputChange}
           onSubmit={onSubmit}
           input={input}
-          validateUrl={validateUrl}
+          // validateUrl={validateUrl}
           loading={loading.isLoading}
         />
 
+        {error && <p className="text-customOrange font-bold text-xl">{error}</p>}
         {/* Container for the image and bounding boxes */}
         <div className="relative">
-          {validateUrl(input) && (
+          {/* {validateUrl(input) && ( */}
             <img
               id="inputimage"
               alt=""
@@ -109,7 +116,7 @@ const FaceRecognition = () => {
               height="auto"
               className="block mx-auto" // Ensures image is centered and stays in the document flow
             />
-          )}
+          {/* )} */}
           {box.map((item) => (
             <div
               key={`box${item.topRow}${item.rightCol}`}

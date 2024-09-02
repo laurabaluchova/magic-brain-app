@@ -38,6 +38,7 @@ const AuthProvider = ({ children }) => {
   const createUser = async (email, password, name) => {
     try {
       if (email !== "" && password !== "" && name !== "") {
+        console.log("creating user")
         setRegistrationError({})
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -50,8 +51,9 @@ const AuthProvider = ({ children }) => {
       
       return userWithName
     } else {
+      console.log("not creating user")
       setRegistrationError({message: "Some inputs seem to be empty"})
-      return
+      return registrationError
     }
       
     } catch (error) {      
