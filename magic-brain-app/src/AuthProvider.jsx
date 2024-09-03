@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
       
     } catch (error) {      
       console.error("Error signing in: ", error);  
-      setRegistrationError(error)    
+      setRegistrationError({message: "Check again"})    
     }  finally {
       setLoading(false);
     }
@@ -76,7 +76,7 @@ const AuthProvider = ({ children }) => {
       return logggedInUser;
     } catch (error) {      
       console.error("Error logging in: ", error);
-      setLoginError(error)
+      setLoginError({message: "Check again"})
     } finally {
       setLoading(false);
     }
