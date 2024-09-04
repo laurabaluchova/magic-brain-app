@@ -28,12 +28,16 @@ const Register = () => {
   // }
 
   const handleRegister = async (e) => {
-    console.log("reg")
+    console.log("reg");
     e.preventDefault();      
-    
-    const user = await createUser(email, password, name);      
-        if (user){navigate("/profile")};   
-  };
+    try {
+        const user = await createUser(email, password, name);
+        console.log(user)      
+        if (user.uid) {navigate("/profile")};        
+    } catch (error) {
+        console.error("Registration failed:", error);       
+    }
+};
 
   return (
     <div>
@@ -83,7 +87,7 @@ const Register = () => {
             {/* <!-- Card Footer --> */}
             <p className="text-customOrange font-bold text-xl">{registrationError.message}</p>
             <button className="bg-black text-white px-4 py-2 rounded hover:bg-customBlue" onClick={handleRegister}>
-              Register
+              Create Account
             </button>
             <span>
               <Link className="underline" to="/login">

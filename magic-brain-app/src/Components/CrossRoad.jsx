@@ -17,7 +17,7 @@ const CrossRoad = () => {
         </div>
         <div className="p-6 flex-grow">
           {/* <!-- Card Body --> */}
-          <img src="/face.png" width="auto" height="600px" alt="Face Recognition" />
+          <img src="/face.png" width="auto" height="600px" alt="Face Recognition" className="hover:opacity-80" />
         </div>
         <div className="bg-gray-100 p-4 text-center">
           {/* <!-- Card Footer --> */}
@@ -39,7 +39,7 @@ const CrossRoad = () => {
         </div>
         <div className="p-6 flex-grow">
           {/* <!-- Card Body --> */}
-          <img src="/color.png" width="auto" height="600px" alt="Color Detection" />
+          <img src="/color.png" width="auto" height="600px" alt="Color Detection" className="hover:opacity-80" />
         </div>
         <div className="bg-gray-100 p-4 text-center">
           {/* <!-- Card Footer --> */}

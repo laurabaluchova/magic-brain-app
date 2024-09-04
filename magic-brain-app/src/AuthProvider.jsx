@@ -46,10 +46,10 @@ const AuthProvider = ({ children }) => {
         password
       );
       const user = userCredential.user; 
-      const userWithName = await updateProfile(user, { displayName: name });   
-      setLoading(true);
+      await updateProfile(user, { displayName: name });   
+      setLoading(true);  
       
-      return userWithName
+      return user
     } else {
       console.log("not creating user")
       setRegistrationError({message: "Some inputs seem to be empty"})
@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
       
     } catch (error) {      
       console.error("Error signing in: ", error);  
-      setRegistrationError({message: "Check again"})    
+      setRegistrationError({message: "Check the credentials, something seems to be wrong"})    
     }  finally {
       setLoading(false);
     }
@@ -76,7 +76,7 @@ const AuthProvider = ({ children }) => {
       return logggedInUser;
     } catch (error) {      
       console.error("Error logging in: ", error);
-      setLoginError({message: "Check again"})
+      setLoginError({message: "Check the credentials, something seems to be wrong"})
     } finally {
       setLoading(false);
     }

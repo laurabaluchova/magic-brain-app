@@ -19,7 +19,19 @@ const Header = () => {
   const navLinks = (
     <>
       {!user && (
-        <>
+        <>          
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "px-4 py-2 rounded transition-colors duration-300 bg-black text-white"
+                  : "px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-black focus:outline-none focus:bg-black focus:text-white"
+              }
+              to="/register"
+            >
+              Create Account
+            </NavLink>
+          </li>
           <li>
             <NavLink
               className={({ isActive }) =>
@@ -30,18 +42,6 @@ const Header = () => {
               to="/login"
             >
               Log In
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? "px-4 py-2 rounded transition-colors duration-300 bg-black text-white"
-                  : "px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-black focus:outline-none focus:bg-black focus:text-white"
-              }
-              to="/register"
-            >
-              Register
             </NavLink>
           </li>
         </>

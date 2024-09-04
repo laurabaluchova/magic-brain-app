@@ -2,6 +2,7 @@ import{ useState, useEffect } from 'react';
 import { auth } from './App';
 import Register from './Components/Register';
 import CrossRoad from './Components/CrossRoad';
+import HomePageUnauthorized from './Components/HomepageUnauthorized';
 
 
 function Homepage() {
@@ -19,7 +20,7 @@ function Homepage() {
 
   return (
     <div>
-      {currentUser ? <CrossRoad /> : <Register />}
+      {currentUser ? <CrossRoad /> : <HomePageUnauthorized />}
     </div>
   );
 }
