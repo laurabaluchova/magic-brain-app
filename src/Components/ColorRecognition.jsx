@@ -1,22 +1,25 @@
 import ImageLinkForm from "./ImageLinkForm";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import ColorSwatch from "./ColorSwatch";
 import { auth } from "../App";
+import { AuthContext } from "../AuthProvider";
 
 const ColorRecognition = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  // const [currentUser, setCurrentUser] = useState(null);
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user); 
-    });   
-    return () => unsubscribe();
-  }, []);
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     setCurrentUser(user); 
+  //   });   
+  //   return () => unsubscribe();
+  // }, []);
+  const { user } = useContext(AuthContext);
+
   const [input, setInput] = useState("");
   const [imageColors, setImageColors] = useState("");
   const [loading, setLoading] = useState({isLoading: false, cursor: "cursor-default"})
-  const userName = currentUser.displayName;  
+  const userName = user.displayName;  
 
   const prepareColorsArray = (data) => {
     let colorsArray = [];

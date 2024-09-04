@@ -1,22 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 // import "./FaceRecognition.css";
 import ImageLinkForm from "./ImageLinkForm";
 import { auth } from "../App";
+import { AuthContext } from "../AuthProvider";
 
 const FaceRecognition = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  // const [currentUser, setCurrentUser] = useState(null);
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user); 
-    });   
-    return () => unsubscribe();
-  }, []);
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     setCurrentUser(user); 
+  //   });   
+  //   return () => unsubscribe();
+  // }, []);
+  const { user } = useContext(AuthContext);
 
   const [box, setBox] = useState([]);
   const [input, setInput] = useState("");
-  const userName = currentUser.displayName;
+  const userName = user.displayName;
   const [loading, setLoading] = useState({isLoading: false, cursor: "cursor-default"});
   const [error, setError] = useState("");
 
