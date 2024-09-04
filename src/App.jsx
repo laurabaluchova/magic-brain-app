@@ -24,19 +24,19 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// const db = getFirestore(app);
 
 const auth = getAuth(app)
 export {auth}
 
-async function getUsers(db) {
-const usersCollection = collection(db, 'users');
-const userSnapshot = await getDocs(usersCollection);
-const userList = userSnapshot.docs.map(doc => doc.data());
-return userList;
-}
+// async function getUsers(db) {
+// const usersCollection = collection(db, 'users');
+// const userSnapshot = await getDocs(usersCollection);
+// const userList = userSnapshot.docs.map(doc => doc.data());
+// return userList;
+// }
 
-const demo_users = await getUsers(db);
+// const demo_users = await getUsers(db);
 
 function App() { 
   // const [currentUser, setCurrentUser] = useState(null);
