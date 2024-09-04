@@ -14,11 +14,11 @@ const FaceRecognition = () => {
   //   });   
   //   return () => unsubscribe();
   // }, []);
-  const { user } = useContext(AuthContext);
+  const { user, loading : authLoading } = useContext(AuthContext);
 
   const [box, setBox] = useState([]);
   const [input, setInput] = useState("");
-  const userName = user.displayName;
+  const userName = user ? user.displayName : "Guest";  
   const [loading, setLoading] = useState({isLoading: false, cursor: "cursor-default"});
   const [error, setError] = useState("");
 
@@ -97,6 +97,10 @@ const FaceRecognition = () => {
       console.log("incorrect image url");
     }
     setLoading({isLoading: false, cursor: "cursor-default"})
+  }
+
+  if (authLoading) {
+    return <div>Loading...</div>; 
   }
 
   return (
