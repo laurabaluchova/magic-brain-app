@@ -14,12 +14,12 @@ const ColorRecognition = () => {
   //   });   
   //   return () => unsubscribe();
   // }, []);
-  const { user } = useContext(AuthContext);
+  const { user, loading : authLoading } = useContext(AuthContext);
 
   const [input, setInput] = useState("");
   const [imageColors, setImageColors] = useState("");
   const [loading, setLoading] = useState({isLoading: false, cursor: "cursor-default"})
-  const userName = user.displayName;  
+  const userName = user ? user.displayName : "Guest";  
 
   const prepareColorsArray = (data) => {
     let colorsArray = [];
@@ -71,6 +71,10 @@ const ColorRecognition = () => {
       console.log("incorrect image url");
     }
     setLoading({isLoading: false, cursor: "cursor-default"})
+  }
+
+  if (authLoading) {
+    return <div>Loading...</div>; 
   }
 
   return (
