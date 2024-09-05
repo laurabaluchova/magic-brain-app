@@ -52,7 +52,7 @@ const ColorRecognition = () => {
       setLoading({ isLoading: true, cursor: "cursor-wait" });
   
       try {       
-        let response = await fetch('https://ai-brain-server.onrender.com/imageurl', {
+        let response = await fetch(`https://ai-brain-server.onrender.com/imageurl`, {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -77,8 +77,10 @@ const ColorRecognition = () => {
       } catch (error) {        
         console.error("An error occurred:", error);
       } finally {
+
         setLoading({ isLoading: false, cursor: "cursor-default" });
       }
+    }
     // } else {
     //   console.log("incorrect image url");
     // }
