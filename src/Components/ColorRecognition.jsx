@@ -47,31 +47,49 @@ const ColorRecognition = () => {
 
   async function onSubmit() {
     console.log("click");
-    if (input !== "" ) {
-      setLoading({isLoading: true, cursor: "cursor-wait"})
-
-      let response = await fetch(`/api/imageurl`, {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          input: input,
-          module: {
-            id: "color-recognition",
-            name: "colors",
-          },
-        }),
-      });
-
-      let fetchedData = await response.json();
-      console.log(fetchedData);
-      if (fetchedData) {
-        displayColorSwatch(prepareColorsArray(fetchedData));
+  
+    if (input !== "") {
+      setLoading({ isLoading: true, cursor: "cursor-wait" });
+  
+      try {
+        // Make the API request
+        let response = await fetch(`/api/imageurl`, {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            input: input,
+            module: {
+              id: "color-recognition",
+              name: "colors",
+            },
+          }),
+        });
+  
+        // Check if the response was successful
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+  
+        // Parse the JSON response
+        let fetchedData = await response.json();
+        console.log(fetchedData);
+  
+        // If we have valid data, process it
+        if (fetchedData) {
+          displayColorSwatch(prepareColorsArray(fetchedData));
+        }
+      } catch (error) {
+        // Handle any errors
+        console.error("An error occurred:", error);
+      } finally {
+        // Reset the loading state regardless of success or error
+        setLoading({ isLoading: false, cursor: "cursor-default" });
       }
     } else {
       console.log("incorrect image url");
     }
-    setLoading({isLoading: false, cursor: "cursor-default"})
   }
+  
 
   if (authLoading) {
     return <div>Loading...</div>; 
