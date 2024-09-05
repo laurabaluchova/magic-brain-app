@@ -51,9 +51,8 @@ const ColorRecognition = () => {
     if (input !== "") {
       setLoading({ isLoading: true, cursor: "cursor-wait" });
   
-      try {
-        // Make the API request
-        let response = await fetch(`/api/imageurl`, {
+      try {       
+        let response = await fetch('https://ai-brain-server.onrender.com/imageurl', {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -63,31 +62,26 @@ const ColorRecognition = () => {
               name: "colors",
             },
           }),
-        });
-  
-        // Check if the response was successful
+        });  
+        
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
   
-        // Parse the JSON response
         let fetchedData = await response.json();
-        console.log(fetchedData);
-  
-        // If we have valid data, process it
+        console.log(fetchedData);  
+        
         if (fetchedData) {
           displayColorSwatch(prepareColorsArray(fetchedData));
         }
-      } catch (error) {
-        // Handle any errors
+      } catch (error) {        
         console.error("An error occurred:", error);
       } finally {
-        // Reset the loading state regardless of success or error
         setLoading({ isLoading: false, cursor: "cursor-default" });
       }
-    } else {
-      console.log("incorrect image url");
-    }
+    // } else {
+    //   console.log("incorrect image url");
+    // }
   }
   
 
