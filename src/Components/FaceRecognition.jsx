@@ -71,7 +71,7 @@ const FaceRecognition = () => {
     if (input !== "") {
       setLoading({isLoading: true, cursor: "cursor-wait"})      
 
-      let response = await fetch(`/api/imageurl`, {
+      let response = await fetch(`https://ai-brain-server.onrender.com/imageurl`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
