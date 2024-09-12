@@ -71,14 +71,13 @@ const FaceRecognition = () => {
     if (input !== "") {
       setLoading({isLoading: true, cursor: "cursor-wait"})      
 
-      let response = await fetch(`https://ai-brain-server.onrender.com/imageurl`, {
+      let response = await fetch(`https://vs77mfyngb.execute-api.eu-north-1.amazonaws.com/test/image`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           input: input,
           module: {
-            id: "face-detection",
-            name: "faces",
+            id: "face-detection",            
           },
         }),
       });
