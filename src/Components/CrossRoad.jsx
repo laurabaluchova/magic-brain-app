@@ -11,7 +11,7 @@ const CrossRoad = () => {
           navigate("/faces");
         }}
       >
-        <div className="bg-black text-white text-center py-4 px-6">
+        <div className="bg-black text-white text-center py-4 px-6 dark:bg-gray-100 dark:text-black">
           {/* <!-- Card Header --> */}
           <h2 className="text-xl font-semibold">Face Recognition Mode</h2>
         </div>
@@ -33,7 +33,7 @@ const CrossRoad = () => {
           navigate("/colors");
         }}
       >
-        <div className="bg-black text-white text-center py-4 px-6">
+        <div className="bg-black text-white text-center py-4 px-6 dark:bg-gray-100 dark:text-black">
           {/* <!-- Card Header --> */}
           <h2 className="text-xl font-semibold">Color Detection Mode</h2>
         </div>

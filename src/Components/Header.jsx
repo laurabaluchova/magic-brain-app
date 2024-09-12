@@ -24,8 +24,8 @@ const Header = () => {
             <NavLink
               className={({ isActive }) =>
                 isActive
-                  ? "px-4 py-2 rounded transition-colors duration-300 bg-black text-white"
-                  : "px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-black focus:outline-none focus:bg-black focus:text-white"
+                  ? "px-4 py-2 rounded transition-colors duration-300 bg-black text-white dark:bg-gray-500"
+                  : "dark:hover:bg-gray-500 dark:text-gray-400 px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-black focus:outline-none focus:bg-black focus:text-white"
               }
               to="/register"
             >
@@ -36,8 +36,8 @@ const Header = () => {
             <NavLink
               className={({ isActive }) =>
                 isActive
-                  ? "px-4 py-2 rounded transition-colors duration-300 bg-black text-white"
-                  : "px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-black focus:outline-none focus:bg-black focus:text-white"
+                  ? "px-4 py-2 rounded transition-colors duration-300 bg-black text-white dark:bg-gray-500"
+                  : "dark:hover:bg-gray-500 dark:text-gray-400 px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-black focus:outline-none focus:bg-black focus:text-white"
               }
               to="/login"
             >
@@ -53,7 +53,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive
                   ? "px-4 py-2 rounded transition-colors duration-300 bg-customOrange text-white"
-                  : "px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-customOrange focus:outline-none focus:bg-customOrange focus:text-white"
+                  : "dark:text-gray-400 px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-customOrange focus:outline-none focus:bg-customOrange focus:text-white"
               }
               to="/faces"
             >
@@ -65,7 +65,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive
                   ? "px-4 py-2 rounded transition-colors duration-300 bg-customBlue text-white"
-                  : "px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-customBlue focus:outline-none focus:bg-customBlue focus:text-white"
+                  : "dark:text-gray-400 px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-customBlue focus:outline-none focus:bg-customBlue focus:text-white"
               }
               to="/colors"
             >
@@ -75,7 +75,7 @@ const Header = () => {
 
           <li>
             <a
-              className="px-4 py-2 rounded bg-transparent text-black hover:bg-black hover:text-white hover:cursor-pointer"
+              className="px-4 py-2 rounded bg-transparent text-black hover:bg-black hover:text-white hover:cursor-pointer dark:text-gray-400 dark:hover:bg-gray-600"
               onClick={handleSignOut}
             >
               Sign Out
@@ -89,15 +89,15 @@ const Header = () => {
   return loading ? (
     <span className="loading loading-dots loading-lg flex item-center mx-auto"></span>
   ) : (
-    <div className="navbar flex flex-col lg:flex-row justify-between items-center bg-base-100 m-3 mb-6 border-b border-b-2">
+    <div className="navbar flex flex-col lg:flex-row justify-between items-center  m-3 mb-6 border-b border-b-2">
       <div className="flex items-center justify-between w-full lg:w-auto">
         <a
-          className="btn bg-white hover:bg-white border-0 text-xl"
+          className="btn bg-white hover:bg-white border-0 text-xl dark:bg-transparent dark:hover:bg-transparent"
           onClick={() => {
             navigate("/");
           }}
         >
-          <img className="h-6" src="/brain.png" alt="Magic Brain Logo" />
+          {/* <img className="h-6" src="/brain.png" alt="Magic Brain Logo" /> */}
           Magic Brain App
         </a>
         {/* Toggle button for mobile menu */}

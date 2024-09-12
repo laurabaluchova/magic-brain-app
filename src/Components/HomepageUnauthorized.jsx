@@ -26,11 +26,11 @@ const navigate = useNavigate();
             </div>
             {/* Button container remains consistent */}
             <div className="flex flex-wrap justify-center gap-4 mt-10 w-full max-w-md">
-                <button className="bg-black text-white px-8 py-4 text-lg md:text-xl rounded hover:bg-customOrange w-full sm:w-auto"
+                <button className="bg-black text-white px-8 py-4 text-lg md:text-xl rounded hover:bg-customOrange w-full sm:w-auto dark:bg-gray-500"
                 onClick={() => navigate('/register')}>
                     Create Account
                 </button>
-                <button className="bg-black text-white px-8 py-4 text-lg md:text-xl rounded hover:bg-customOrange w-full sm:w-auto"
+                <button className="bg-black text-white px-8 py-4 text-lg md:text-xl rounded hover:bg-customOrange w-full sm:w-auto dark:bg-gray-500"
                 onClick={() => navigate('/login')}>
                     Log In
                 </button>

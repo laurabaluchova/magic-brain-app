@@ -39,14 +39,14 @@ const Login = () => {
     <div>        
       <div className="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden flex flex-col h-full">
         
-            <div className="bg-black text-white text-center py-4 px-6">
+            <div className="bg-black text-white text-center py-4 px-6 dark:bg-gray-100 dark:text-black">
           {/* <!-- Card Header --> */}
           <h2 className="text-xl font-semibold">Login Form</h2>
         </div>
               <form >
                 <div className="form-control p-3">
                   <label className="label">
-                    <span className="label-text">Email</span>
+                    <span className="label-text dark:text-gray-800">Email</span>
                   </label>
                   <input
                     type="text"
@@ -58,7 +58,7 @@ const Login = () => {
                 </div>
                 <div className="form-control p-3">
                   <label className="label">
-                    <span className="label-text">Password</span>
+                    <span className="label-text dark:text-gray-800">Password</span>
                   </label>
                   <input
                     type="password"
@@ -75,7 +75,7 @@ const Login = () => {
               Log In
             </button>
             <span>
-              <Link className="underline" to="/register">
+              <Link className="underline dark:text-gray-800" to="/register">
                 Create account
               </Link>
             </span>
