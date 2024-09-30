@@ -1,19 +1,3 @@
-// import React, {useContext} from 'react'
-
-// const AuthContext = React.createContext()
-
-// export function AuthProvider({children, value}) {
-//   return (
-//     <AuthContext.Provider value={value}>
-//       {children}
-//     </AuthContext.Provider>
-//   )
-// }
-
-// export function useAuthValue(){
-//   return useContext(AuthContext)
-// }
-
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -23,7 +7,6 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "./App";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext(null);
 
@@ -57,8 +40,9 @@ const AuthProvider = ({ children }) => {
     }
       
     } catch (error) {      
-      console.error("Error signing in: ", error);  
-      setRegistrationError({message: "Check the credentials, something seems to be wrong"})    
+      console.error("Error signing in: ", error);          
+      const errorText = error.message.split(":")[1];
+      setRegistrationError({message: errorText}) 
     }  finally {
       setLoading(false);
     }
@@ -66,6 +50,7 @@ const AuthProvider = ({ children }) => {
 
   const loginUser = async (email, password) => {
     try {
+      if (email !== "" && password !== "") {
       const logggedInUser = await signInWithEmailAndPassword(
         auth,
         email,
@@ -74,9 +59,14 @@ const AuthProvider = ({ children }) => {
       setLoading(true);
       setLoginError({})
       return logggedInUser;
+    } else {
+      setLoginError({message: "Some inputs seem to be empty"})
+      return registrationError
+    }
     } catch (error) {      
       console.error("Error logging in: ", error);
-      setLoginError({message: "Check the credentials, something seems to be wrong"})
+      const errorText = error.message.split(":")[1];
+      setLoginError({message: errorText})
     } finally {
       setLoading(false);
     }
