@@ -4,16 +4,7 @@ import ColorSwatch from "./ColorSwatch";
 import { auth } from "../App";
 import { AuthContext } from "../AuthProvider";
 
-const ColorRecognition = () => {
-  // const [currentUser, setCurrentUser] = useState(null);
-
-  // useEffect(() => {
-    
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     setCurrentUser(user); 
-  //   });   
-  //   return () => unsubscribe();
-  // }, []);
+const ColorRecognition = () => { 
   const { user, loading : authLoading } = useContext(AuthContext);
 
   const [input, setInput] = useState("");
@@ -52,7 +43,7 @@ const ColorRecognition = () => {
       setLoading({ isLoading: true, cursor: "cursor-wait" });
   
       try {       
-        let response = await fetch(`https://vs77mfyngb.execute-api.eu-north-1.amazonaws.com/test/image`, {
+        let response = await fetch(import.meta.env.VITE_AWS_FETCH_URL, {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -80,9 +71,7 @@ const ColorRecognition = () => {
         setLoading({ isLoading: false, cursor: "cursor-default" });
       }
     }
-    // } else {
-    //   console.log("incorrect image url");
-    // }
+    
   }
   
 

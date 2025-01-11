@@ -52,9 +52,7 @@ const FaceRecognition = () => {
     return locationsArray;
   };
 
-  const serverUrl = "https://ai-brain-server.onrender.com";
-
-  const onInputChange = (event) => {
+   const onInputChange = (event) => {
     setInput(event.target.value);
     setError("")    
     setBox([]);
@@ -71,7 +69,7 @@ const FaceRecognition = () => {
     if (input !== "") {
       setLoading({isLoading: true, cursor: "cursor-wait"})      
 
-      let response = await fetch(`https://vs77mfyngb.execute-api.eu-north-1.amazonaws.com/test/image`, {
+      let response = await fetch(import.meta.env.VITE_AWS_FETCH_URL, {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

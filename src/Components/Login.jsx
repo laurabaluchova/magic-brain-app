@@ -37,10 +37,8 @@ const Login = () => {
 
   return (
     <div>        
-      <div className="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden flex flex-col h-full">
-        
-            <div className="bg-black text-white text-center py-4 px-6 dark:bg-gray-100 dark:text-black">
-          {/* <!-- Card Header --> */}
+      <div className="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden flex flex-col h-full">        
+            <div className="bg-black text-white text-center py-4 px-6 dark:bg-gray-100 dark:text-black">          
           <h2 className="text-xl font-semibold">Login Form</h2>
         </div>
               <form >
@@ -68,8 +66,7 @@ const Login = () => {
                     onChange={(e) => {setPassword(e.target.value)} }
                   />
                 </div>
-                <div className="bg-gray-100 p-4 text-center flex flex-col gap-2">
-            {/* <!-- Card Footer --> */}
+                <div className="bg-gray-100 p-4 text-center flex flex-col gap-2">            
             <p className="text-customOrange font-bold text-xl">{loginError.message}</p>
             <button className="bg-black text-white px-4 py-2 rounded hover:bg-customBlue" onClick={handleLogIn}>
               Log In
