@@ -3,17 +3,9 @@ import { useState, useContext } from "react";
 import ImageLinkForm from "./ImageLinkForm";
 import { auth } from "../App";
 import { AuthContext } from "../AuthProvider";
+import { onSubmit } from "../helpers/onSubmitHelper";
 
 const FaceRecognition = () => {
-  // const [currentUser, setCurrentUser] = useState(null);
-
-  // useEffect(() => {
-    
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     setCurrentUser(user); 
-  //   });   
-  //   return () => unsubscribe();
-  // }, []);
   const { user, loading : authLoading } = useContext(AuthContext);
 
   const [box, setBox] = useState([]);
@@ -63,38 +55,67 @@ const FaceRecognition = () => {
     return regex.test(URL);
   };
 
-  async function onSubmit() {
-    console.log("click");
-    setError("");
-    if (input !== "") {
-      setLoading({isLoading: true, cursor: "cursor-wait"})      
+  // async function onSubmit() {
+  //   console.log("click");
+  //   setError("");
+  //   if (input !== "") {
+  //     setLoading({isLoading: true, cursor: "cursor-wait"})      
 
-      let response = await fetch(import.meta.env.VITE_AWS_FETCH_URL, {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          input: input,
-          module: {
-            id: "face-detection",            
-          },
-        }),
-      });
+  //     let response = await fetch(import.meta.env.VITE_AWS_FETCH_URL, {
+  //       method: "post",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         input: input,
+  //         module: {
+  //           id: "face-detection",            
+  //         },
+  //       }),
+  //     });
 
-      let fetchedData = await response.json();
-      console.log(fetchedData);
-      if (fetchedData && fetchedData.outputs[0].data.regions.length !== 0) {
-        displayFaceBox(
-          calculateFaceLocation(prepareLocationsArray(fetchedData))
-        );
-      }
-      else if (fetchedData && fetchedData.outputs[0].data.regions.length === 0) {
-        setError("There was not recognized any face")
-      }
-    } else {
-      console.log("incorrect image url");
+  //     let fetchedData = await response.json();
+  //     console.log(fetchedData);
+  //     if (fetchedData && fetchedData.outputs[0].data.regions.length !== 0) {
+  //       displayFaceBox(
+  //         calculateFaceLocation(prepareLocationsArray(fetchedData))
+  //       );
+  //     }
+  //     else if (fetchedData && fetchedData.outputs[0].data.regions.length === 0) {
+  //       setError("There was not recognized any face")
+  //     }
+  //   } else {
+  //     console.log("incorrect image url");
+  //   }
+  //   setLoading({isLoading: false, cursor: "cursor-default"})
+  // };
+
+  const moduleId = "face-detection";
+
+  const processDataHandler = (fetchedData) => {
+    if (fetchedData && fetchedData.outputs[0].data.regions.length !== 0) {
+      displayFaceBox(
+        calculateFaceLocation(prepareLocationsArray(fetchedData))
+      )
     }
-    setLoading({isLoading: false, cursor: "cursor-default"})
-  }
+    else if (fetchedData && fetchedData.outputs[0].data.regions.length === 0) {
+      setError("There was not recognized any face")
+    } 
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+   
+    try {
+      await onSubmit({ 
+        setError, 
+        input, 
+        setLoading, 
+        moduleId, 
+        processDataHandler 
+      });
+    } catch (error) {
+      console.error('Submission failed:', error);
+    } 
+  };  
 
   if (authLoading) {
     return <div>Loading...</div>; 
@@ -111,7 +132,7 @@ const FaceRecognition = () => {
       <div className="flex flex-col items-center gap-2">
         <ImageLinkForm
           onInputChange={onInputChange}
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit}
           input={input}
           // validateUrl={validateUrl}
           loading={loading.isLoading}
