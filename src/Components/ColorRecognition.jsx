@@ -116,6 +116,7 @@ const ColorRecognition = () => {
           // validateUrl={validateUrl}
           loading={loading.isLoading}
         />
+        {error && <p className="text-customBlue font-bold text-xl">{error}</p>}
         <div className="relative">
           {/* {validateUrl(input) && <ColorSwatch imageColors={imageColors} />} */}
           <ColorSwatch mainColor ={mainColor} />
