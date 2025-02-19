@@ -1,4 +1,4 @@
-const ImageLinkForm = ({ onInputChange, onSubmit, input, loading }) => {
+const ImageLinkForm = ({ onInputChange, onSubmit, input, loading, btnActive }) => {  
   return (
     <div className="flex flex-col w-11/12 sm:w-5/6 lg:w-2/3 mx-auto mt-6 mb-4">
       <label className="block text-black text-lg sm:text-xl mb-2 mr-auto dark:text-gray-400">
@@ -13,8 +13,11 @@ const ImageLinkForm = ({ onInputChange, onSubmit, input, loading }) => {
           placeholder="Insert image URL here"
         />
         <button
-          className="bg-black text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg 
-          hover:bg-gray-600 flex-shrink-0 w-full sm:w-auto text-base sm:text-xl dark:bg-gray-500"
+          className={`bg-black text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg 
+            flex-shrink-0 w-full sm:w-auto text-base sm:text-xl 
+            dark:bg-gray-500 
+            ${btnActive ? 'hover:bg-gray-600' : 'bg-gray-400 cursor-not-allowed opacity-50'}`}
+            disabled={!btnActive}
           onClick={onSubmit}
         >
           {loading ? "Loading..." : "Detect"}

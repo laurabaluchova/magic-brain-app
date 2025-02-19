@@ -1,7 +1,5 @@
-import { useState, useContext } from "react";
-// import "./FaceRecognition.css";
+import { useState, useContext, useEffect } from "react";
 import ImageLinkForm from "./ImageLinkForm";
-import { auth } from "../App";
 import { AuthContext } from "../AuthProvider";
 import { onSubmit } from "../helpers/onSubmitHelper";
 
@@ -13,6 +11,26 @@ const FaceRecognition = () => {
   const userName = user ? user.displayName : "Guest";  
   const [loading, setLoading] = useState({isLoading: false, cursor: "cursor-default"});
   const [error, setError] = useState("");
+  const [btnActive, setBtnActive] = useState(false);
+
+  let isValid = function(urlTocheck=""){
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = urlTocheck;
+  
+      img.onload = () => resolve(true); 
+      img.onerror = () => resolve(false); 
+    });
+ };
+
+ useEffect(() => {
+  console.log(input)
+  const checkValidity = async () => {
+    const valid = await isValid(input);
+    setBtnActive(valid);
+  }
+  checkValidity();  
+ }, [input]);
 
   const displayFaceBox = (box) => {
     setBox(box);
@@ -47,46 +65,8 @@ const FaceRecognition = () => {
    const onInputChange = (event) => {
     setInput(event.target.value);
     setError("")    
-    setBox([]);
+    setBox([]);    
   };
-
-  const validateUrl = (URL) => {
-    const regex = new RegExp("(https?://.*.(?:png|jpg|jpeg))");
-    return regex.test(URL);
-  };
-
-  // async function onSubmit() {
-  //   console.log("click");
-  //   setError("");
-  //   if (input !== "") {
-  //     setLoading({isLoading: true, cursor: "cursor-wait"})      
-
-  //     let response = await fetch(import.meta.env.VITE_AWS_FETCH_URL, {
-  //       method: "post",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         input: input,
-  //         module: {
-  //           id: "face-detection",            
-  //         },
-  //       }),
-  //     });
-
-  //     let fetchedData = await response.json();
-  //     console.log(fetchedData);
-  //     if (fetchedData && fetchedData.outputs[0].data.regions.length !== 0) {
-  //       displayFaceBox(
-  //         calculateFaceLocation(prepareLocationsArray(fetchedData))
-  //       );
-  //     }
-  //     else if (fetchedData && fetchedData.outputs[0].data.regions.length === 0) {
-  //       setError("There was not recognized any face")
-  //     }
-  //   } else {
-  //     console.log("incorrect image url");
-  //   }
-  //   setLoading({isLoading: false, cursor: "cursor-default"})
-  // };
 
   const moduleId = "face-detection";
 
@@ -127,7 +107,7 @@ const FaceRecognition = () => {
         {`${userName}, `}
         <span className="font-bold text-customOrange">let AI recognize faces</span>
         {" in the picture"}
-      </h1>
+      </h1>     
 
       <div className="flex flex-col items-center gap-2">
         <ImageLinkForm
@@ -136,21 +116,20 @@ const FaceRecognition = () => {
           input={input}
           // validateUrl={validateUrl}
           loading={loading.isLoading}
+          btnActive={btnActive}
         />
 
-        {error && <p className="text-customOrange font-bold text-xl">{error}</p>}
-        {/* Container for the image and bounding boxes */}
-        <div className="relative">
-          {/* {validateUrl(input) && ( */}
+        {error && <p className="text-customOrange font-bold text-xl">{error}</p>}        
+        <div className="relative">          
             <img
               id="inputimage"
               alt=""
               src={input}
               width="500px"
               height="auto"
-              className="block mx-auto" // Ensures image is centered and stays in the document flow
+              className="block mx-auto" 
             />
-          {/* )} */}
+          
           {box.map((item) => (
             <div
               key={`box${item.topRow}${item.rightCol}`}

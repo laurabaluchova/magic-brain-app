@@ -1,5 +1,5 @@
 import ImageLinkForm from "./ImageLinkForm";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import ColorSwatch from "./ColorSwatch";
 import { AuthContext } from "../AuthProvider";
 import { onSubmit } from "../helpers/onSubmitHelper";
@@ -11,6 +11,26 @@ const ColorRecognition = () => {
   const [mainColor, setMainColor] = useState("");
   const [loading, setLoading] = useState({isLoading: false, cursor: "cursor-default"});
   const [error, setError] = useState("");
+  const [btnActive, setBtnActive] = useState(false);
+  
+    let isValid = function(urlTocheck=""){
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.src = urlTocheck;
+    
+        img.onload = () => resolve(true); 
+        img.onerror = () => resolve(false); 
+      });
+   };
+  
+   useEffect(() => {
+    console.log(input)
+    const checkValidity = async () => {
+      const valid = await isValid(input);
+      setBtnActive(valid);
+    }
+    checkValidity();  
+   }, [input]);
 
   const userName = user ? user.displayName : "Guest";  
 
@@ -33,47 +53,7 @@ const ColorRecognition = () => {
     setMainColor("");
   };
 
-  // const validateUrl = (url) => {
-  //   const regex = new RegExp("(https?://.*.(?:png|jpg|jpeg))");
-  //   return regex.test(url);
-  // };
-
-  // async function onSubmit() {  
-  //   if (input !== "") {
-  //     setLoading({ isLoading: true, cursor: "cursor-wait" });
-  
-  //     try {       
-  //       let response = await fetch(import.meta.env.VITE_AWS_FETCH_URL, {
-  //         method: "post",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify({
-  //           input: input,
-  //           module: {
-  //             id: "color-recognition",              
-  //           },
-  //         }),
-  //       });  
-        
-  //       if (!response.ok) {
-  //         throw new Error(`Error: ${response.status} ${response.statusText}`);
-  //       }
-  
-  //       let fetchedData = await response.json();        
-        
-  //       if (fetchedData) {
-  //         displayColorSwatch(prepareColorsArray(fetchedData));
-  //       }
-  //     } catch (error) {        
-  //       console.error("An error occurred:", error);
-  //     } finally {
-
-  //       setLoading({ isLoading: false, cursor: "cursor-default" });
-  //     }
-  //   }
-    
-  // }
-
-  const moduleId = "color-recognition";
+ const moduleId = "color-recognition";
 
   const processDataHandler = (fetchedData) => {
     displayColorSwatch(prepareColorsArray(fetchedData));
@@ -112,24 +92,20 @@ const ColorRecognition = () => {
         <ImageLinkForm
           onInputChange={onInputChange}
           onSubmit={handleSubmit}
-          input={input}
-          // validateUrl={validateUrl}
+          input={input}          
           loading={loading.isLoading}
+          btnActive={btnActive}
         />
         {error && <p className="text-customBlue font-bold text-xl">{error}</p>}
-        <div className="relative">
-          {/* {validateUrl(input) && <ColorSwatch imageColors={imageColors} />} */}
-          <ColorSwatch mainColor ={mainColor} />
-
-          {/* {validateUrl(input) && ( */}
+        <div className="relative">          
+          <ColorSwatch mainColor ={mainColor} />         
             <img
               id="inputimage"
               alt=""
               src={input}
               width="500px"
               height="auto"
-            ></img>
-          {/* )} */}
+            ></img>          
         </div>
       </div>
     </div>
