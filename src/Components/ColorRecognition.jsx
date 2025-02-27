@@ -105,6 +105,7 @@ const ColorRecognition = () => {
               src={input}
               width="500px"
               height="auto"
+              className="mb-10" 
             ></img>          
         </div>
       </div>

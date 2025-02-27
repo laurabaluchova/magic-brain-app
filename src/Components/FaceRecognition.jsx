@@ -125,7 +125,7 @@ const FaceRecognition = () => {
               src={input}
               width="500px"
               height="auto"
-              className="block mx-auto" 
+              className="block mx-auto mb-10" 
             />
           
           {box.map((item) => (
