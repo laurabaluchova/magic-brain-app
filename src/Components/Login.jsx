@@ -23,14 +23,14 @@ const Login = () => {
 
   // If the user is already authenticated, redirect to the home page
 //   if (user) {
-//     navigate("/profile");
+//     navigate("/");
 //   }
 
-  // Handle form submission for user login
+ 
   const handleLogIn = async (e) => {
     e.preventDefault();    
     const loggedUser = await loginUser(email, password);      
-        if (loggedUser.user.uid){navigate("/profile")};
+        if (loggedUser.user.uid){navigate("/")};
        
 
     };
@@ -49,19 +49,19 @@ const Login = () => {
                   <input
                     type="text"
                     name="email"
-                    placeholder="Email"
+                    placeholder="john.doe@gmail.com"
                     className="input input-bordered"
                     onChange={(e) => {setEmail(e.target.value)} }
                   />
                 </div>
                 <div className="form-control p-3">
                   <label className="label">
-                    <span className="label-text dark:text-gray-800">Password</span>
+                    <span className="label-text dark:text-gray-800">Password (at least 6 characters)</span>
                   </label>
                   <input
                     type="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="●●●●●●"
                     className="input input-bordered"
                     onChange={(e) => {setPassword(e.target.value)} }
                   />

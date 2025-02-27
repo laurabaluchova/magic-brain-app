@@ -1,11 +1,8 @@
 import{ useState, useEffect, useContext } from 'react';
 import { auth } from './App';
-import Register from './Components/Register';
 import CrossRoad from './Components/CrossRoad';
 import HomePageUnauthorized from './Components/HomepageUnauthorized';
 import { AuthContext } from './AuthProvider';
-
-
 
 function Homepage() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -13,12 +10,11 @@ function Homepage() {
 
   useEffect(() => {    
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user); // Update the currentUser state
+      setCurrentUser(user); 
     });
 
     return () => unsubscribe();
   }, []);
-
   
   return (
     <div>

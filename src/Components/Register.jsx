@@ -33,7 +33,7 @@ const Register = () => {
     try {
         const user = await createUser(email, password, name);
         console.log(user)      
-        if (user.uid) {navigate("/profile")};        
+        if (user.uid) {navigate("/")};        
     } catch (error) {
         console.error("Registration failed:", error);       
     }
@@ -53,7 +53,7 @@ const Register = () => {
             <input
               type="text"
               name="name"
-              placeholder="Name"
+              placeholder="John"
               className="input input-bordered"
               onChange={(e) => {setName(e.target.value)} }
             />
@@ -65,19 +65,19 @@ const Register = () => {
             <input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder="john.doe@gmail.com"
               className="input input-bordered"
               onChange={(e) => {setEmail(e.target.value)} }
             />
           </div>
           <div className="form-control p-3">
             <label className="label">
-              <span className="label-text dark:text-gray-800">Password</span>
+              <span className="label-text dark:text-gray-800">Password (at least 6 characters)</span>
             </label>
             <input
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="●●●●●●"
               className="input input-bordered"
               onChange={(e) => {setPassword(e.target.value)} }
             />

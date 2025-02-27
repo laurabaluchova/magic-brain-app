@@ -96,16 +96,13 @@ const Header = () => {
           onClick={() => {
             navigate("/");
           }}
-        >
-          {/* <img className="h-6" src="/brain.png" alt="Magic Brain Logo" /> */}
+        >          
           Magic Brain App
-        </a>
-        {/* Toggle button for mobile menu */}
+        </a>        
         <button
           className="lg:hidden block text-black hover:text-white hover:bg-black p-2 rounded"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {/* Hamburger icon */}
+        >          
           <svg
             className="h-6 w-6"
             fill="none"
@@ -122,7 +119,7 @@ const Header = () => {
           </svg>
         </button>
       </div>
-      {/* Menu for larger screens and conditionally shown menu for smaller screens */}
+      
       <div
         className={`${
           isMenuOpen ? "block" : "hidden"

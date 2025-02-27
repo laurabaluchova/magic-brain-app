@@ -1,10 +1,7 @@
 import './App.css'
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import {getAuth } from 'firebase/auth';
 import Register from './Components/Register';
-import {useState, useEffect} from 'react';
-// import {AuthProvider} from './AuthProvider';
 import Header from './Components/Header';
 import Login from './Components/Login';
 
@@ -24,39 +21,18 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-// const db = getFirestore(app);
 
 const auth = getAuth(app)
 export {auth}
 
-// async function getUsers(db) {
-// const usersCollection = collection(db, 'users');
-// const userSnapshot = await getDocs(usersCollection);
-// const userList = userSnapshot.docs.map(doc => doc.data());
-// return userList;
-// }
-
-// const demo_users = await getUsers(db);
-
-function App() { 
-  // const [currentUser, setCurrentUser] = useState(null);
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     setCurrentUser(user)
-  //    })
-  // }, [])
-
+function App() {   
   return (
-    <>
-    {/* <AuthProvider value={{currentUser}}> */}
+    <>   
     <div>
-    <Header />
-     {/* <h1>{demo_users[0].name}</h1>
-     <h2>{demo_users[0].inputs_count}</h2> */}
+    <Header />     
      <Login/>
      <Register />    
-    </div>
-    {/* <AuthProvider /> */}
+    </div>    
     </>
   )
 }

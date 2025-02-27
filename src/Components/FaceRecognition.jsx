@@ -23,8 +23,7 @@ const FaceRecognition = () => {
     });
  };
 
- useEffect(() => {
-  console.log(input)
+ useEffect(() => {  
   const checkValidity = async () => {
     const valid = await isValid(input);
     setBtnActive(valid);
@@ -113,8 +112,7 @@ const FaceRecognition = () => {
         <ImageLinkForm
           onInputChange={onInputChange}
           onSubmit={handleSubmit}
-          input={input}
-          // validateUrl={validateUrl}
+          input={input}          
           loading={loading.isLoading}
           btnActive={btnActive}
         />
