@@ -26,7 +26,7 @@ export async function onSubmit({setError, input, setLoading, moduleId, processDa
               processDataHandler(fetchedData);
             }
             else {
-                setError("incorrect image url, try e.g. https://images.pexels.com/photos/818261/pexels-photo-818261.jpeg");
+                setError("incorrect image url, try e.g. https://images.pexels.com/photos/1084554/pexels-photo-1084554.jpeg");
               }
           } catch (error) {        
             console.error("An error occurred:", error);

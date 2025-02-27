@@ -7,7 +7,7 @@ const ColorSwatch = ({ mainColor }) => {
           value={mainColor}
           className="w-64"
         />
-        <h1 className="f5">Main color: {mainColor === "" ? "Click Detect to find out main color" : mainColor}</h1>
+        <h1 className="f5">Main color: {mainColor === "" ? "Click Detect button to find out main color" : mainColor}</h1>
       </div>
     );
   };

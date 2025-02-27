@@ -7,7 +7,7 @@ import { onSubmit } from "../helpers/onSubmitHelper";
 const ColorRecognition = () => { 
   const { user, loading : authLoading } = useContext(AuthContext);
 
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState("https://images.pexels.com/photos/1084554/pexels-photo-1084554.jpeg");
   const [mainColor, setMainColor] = useState("");
   const [loading, setLoading] = useState({isLoading: false, cursor: "cursor-default"});
   const [error, setError] = useState("");
