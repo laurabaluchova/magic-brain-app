@@ -47,31 +47,7 @@ const Header = () => {
         </>
       )}
       {user && (
-        <>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? "px-4 py-2 rounded transition-colors duration-300 bg-customOrange text-white"
-                  : "dark:text-gray-400 px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-customOrange focus:outline-none focus:bg-customOrange focus:text-white"
-              }
-              to="/faces"
-            >
-              Face Recognition
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? "px-4 py-2 rounded transition-colors duration-300 bg-customBlue text-white"
-                  : "dark:text-gray-400 px-4 py-2 rounded transition-colors duration-300 bg-transparent text-black hover:text-white hover:bg-customBlue focus:outline-none focus:bg-customBlue focus:text-white"
-              }
-              to="/colors"
-            >
-              Color Detection
-            </NavLink>
-          </li>
+        <>   
 
           <li>
             <a

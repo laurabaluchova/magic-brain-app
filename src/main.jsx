@@ -8,7 +8,6 @@ import Login from './Components/Login.jsx';
 import Header from './Components/Header.jsx';
 import Register from './Components/Register.jsx';
 import ColorRecognition from './Components/ColorRecognition.jsx';
-import FaceRecognition from './Components/FaceRecognition.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -19,9 +18,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<Homepage />} />        
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/colors" element={<ColorRecognition />} />
-        <Route path="/faces" element={<FaceRecognition />} />
+        <Route path="/login" element={<Login />} />                
       </Routes>
     </Router>
     </AuthProvider>

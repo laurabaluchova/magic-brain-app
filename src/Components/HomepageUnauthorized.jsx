@@ -1,4 +1,3 @@
-import { TypeAnimation } from 'react-type-animation';
 import { useNavigate } from 'react-router-dom';
 
 const HomePageUnauthorized = () => {
@@ -7,21 +6,11 @@ const navigate = useNavigate();
     return (
         <div className="flex flex-col items-center justify-center min-h-80 p-2">            
             <div className="h-24 md:h-28 lg:h-32 flex items-center">
-                <TypeAnimation
-                    sequence={[
-                        'Use the power of AI to\nrecognize faces',
-                        2500, 
-                        'Use the power of AI to\ndetect main color',
-                        2500 
-                    ]}
-                    wrapper="span"
-                    speed={7}
-                    deletionSpeed={7}
-                    className="text-3xl md:text-4xl lg:text-5xl font-bold text-center"
-                    style={{ whiteSpace: "pre-line", display: 'inline-block' }}
-                    repeat={Infinity}
-                    preRenderFirstString="true"
-                />
+                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-center">Use the power of AI to detect main color of picture</div>
+                                        
+                
+                
+
             </div>
             
             <div className="flex flex-wrap justify-center gap-4 mt-10 w-full max-w-md">

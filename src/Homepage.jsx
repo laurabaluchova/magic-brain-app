@@ -1,8 +1,8 @@
 import{ useState, useEffect, useContext } from 'react';
 import { auth } from './App';
-import CrossRoad from './Components/CrossRoad';
 import HomePageUnauthorized from './Components/HomepageUnauthorized';
 import { AuthContext } from './AuthProvider';
+import ColorRecognition from './Components/ColorRecognition';
 
 function Homepage() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -18,7 +18,7 @@ function Homepage() {
   
   return (
     <div>
-      {authLoading ? "loading..." : (currentUser ? <CrossRoad /> : <HomePageUnauthorized />)}      
+      {authLoading ? "loading..." : (currentUser ? <ColorRecognition /> : <HomePageUnauthorized />)}      
     </div>
   );
 }
